@@ -1,0 +1,46 @@
+# Format and clean
+fmt:
+	forge fmt
+
+clean:
+	forge clean
+
+# Build
+build:
+	forge build
+
+# Run all tests
+test:
+	forge test -vvv
+
+# Run a specific test by name
+# Usage: make t name=TestName
+t:
+	forge test --match-test $(name) -vvvvv
+
+# Coverage
+coverage:
+	forge coverage
+
+# Deploy to Anvil (local)
+deploy-local:
+	forge script script/DeployOracleIntegration.s.sol:DeployOracleIntegration --rpc-url http://127.0.0.1:8545 --broadcast
+
+# Deploy to testnet (example: Sepolia)
+# Add your key to .env as PRIVATE_KEY=
+deploy-sepolia:
+	forge script script/DeployOracleIntegration.s.sol:DeployOracleIntegration \
+		--rpc-url $$SEPOLIA_RPC_URL \
+		--broadcast \
+		--private-key $$PRIVATE_KEY
+
+# Gas snapshot
+gas:
+	forge snapshot
+
+# Debug a transaction using Anvil
+debug:
+	forge debug $(tx)
+
+# Default target
+all: build test
