@@ -102,7 +102,7 @@ contract OracleIntegration {
 
     /// @notice this function store the price internally.
     /// dev update the lastePrice to the lastest stores it for internal use.
-    function storePrice(uint256 price, uint80 roundId, uint256 timeStamp) public {
+    function storePrice(uint256 price, uint80 roundId, uint256 timeStamp) internal {
         s_lastPrice = price;
         s_lastTimestamp = timeStamp;
         s_roundId = roundId;
